@@ -1,21 +1,22 @@
-# BRUNT Share of Search Tracker
+# BRUNT Share of Boot-Intent Search (SoBIS) Tracker
 
-Monthly Share of Search dashboard powered by Google Keyword Planner CSV exports.
+Monthly **Share of Boot-Intent Search (SoBIS)** dashboard powered by Google Keyword Planner CSV exports. SoBIS counts branded search volume where "boots" appears in the query — isolating work-boot intent (e.g. `carhartt boots`) from total brand demand (which would include apparel like `carhartt jacket`). This makes the metric a cleaner read on competitive position in the boot category specifically.
 
 ## How it works
 
 ```
 You (15 min/month):
-  Keyword Planner UI  →  Export CSV
+  Keyword Planner UI  →  Export CSV  (12 months of "Searches: <Mon> <Year>" columns)
                           ↓
                   python src/validate_csv.py  (catches format issues locally)
                           ↓
-                  Commit to data/YYYY-MM.csv
+                  Commit to data/YYYY-MM.csv  (latest month in filename)
 
 Automated (on every CSV commit):
   GitHub Action  →  src/pipeline.py  →  artifacts/*.csv
-                                       ↓
-                              Streamlit dashboard
+                       (unpivot 12 monthly cols          ↓
+                        → compute SoBIS per         Streamlit dashboard
+                        competitor per month)
 ```
 
 ---

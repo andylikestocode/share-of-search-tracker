@@ -1,5 +1,5 @@
 """
-Share of Search Dashboard — Streamlit.
+Share of Boot-Intent Search (SoBIS) Dashboard — Streamlit.
 
 Reads artifacts/ files (committed to repo by the GitHub Action).
 Deploy free at share.streamlit.io.
@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parent.parent
 ART = ROOT / "artifacts"
 
 st.set_page_config(
-    page_title="BRUNT Share of Search",
+    page_title="BRUNT Share of Boot-Intent Search",
     page_icon="🥾",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -73,10 +73,10 @@ def load():
     return sos, trade, cat
 
 
-st.markdown("# BRUNT / Share of Search")
+st.markdown("# BRUNT / Share of Boot-Intent Search")
 st.markdown(
     '<p style="color:#666; margin-top:-1rem; font-size:0.9rem;">'
-    'Monthly competitive brand search demand · Powered by Google Keyword Planner'
+    'Monthly competitive demand for branded boot searches · Powered by Google Keyword Planner'
     '</p>',
     unsafe_allow_html=True,
 )
@@ -107,7 +107,7 @@ if not brunt.empty:
     rank = (latest["sos_pct"] > b["sos_pct"]).sum() + 1
     c1, c2, c3, c4 = st.columns(4)
     mom = b.get("sos_mom_delta")
-    c1.metric("BRUNT SoS", f"{b['sos_pct']:.1f}%", f"{mom:+.2f} pts MoM" if pd.notna(mom) else None)
+    c1.metric("BRUNT Share", f"{b['sos_pct']:.1f}%", f"{mom:+.2f} pts MoM" if pd.notna(mom) else None)
     c2.metric("Rank", f"#{rank}", f"of {len(latest)}")
     yoy = b.get("sos_yoy_delta")
     c3.metric("YoY", f"{yoy:+.2f} pts" if pd.notna(yoy) else "—")
@@ -116,7 +116,7 @@ if not brunt.empty:
 st.markdown("---")
 
 # --- Trendline ---
-st.markdown("### SoS Trendline")
+st.markdown("### Boot-Intent Search Share Trendline")
 palette = {
     "brunt": "#ff6b00",
     "carhartt": "#c9a961",
@@ -145,7 +145,7 @@ fig.update_layout(
     plot_bgcolor="#0a0a0a", paper_bgcolor="#0a0a0a",
     font=dict(family="JetBrains Mono", color="#e5e5e5"),
     xaxis=dict(showgrid=False, color="#888"),
-    yaxis=dict(title="Share of Search (%)", gridcolor="#1a1a1a", color="#888"),
+    yaxis=dict(title="Share of Boot-Intent Search (%)", gridcolor="#1a1a1a", color="#888"),
     height=480, hovermode="x unified",
     legend=dict(orientation="h", y=-0.2),
     margin=dict(l=20, r=20, t=20, b=20),
@@ -160,7 +160,7 @@ with col_left:
         ["competitor", "sos_pct", "sos_mom_delta", "sos_yoy_delta"]
     ].rename(columns={
         "competitor": "Brand",
-        "sos_pct": "SoS %",
+        "sos_pct": "Share %",
         "sos_mom_delta": "MoM Δ",
         "sos_yoy_delta": "YoY Δ",
     })
@@ -205,3 +205,15 @@ fig2.update_layout(
     margin=dict(l=20, r=20, t=10, b=20),
 )
 st.plotly_chart(fig2, use_container_width=True)
+
+st.markdown("---")
+st.markdown(
+    '<p style="color:#666; font-size:0.8rem; line-height:1.5;">'
+    '<strong style="color:#888;">Methodology.</strong> '
+    "Share % reflects branded search volume where &lsquo;boots&rsquo; is included "
+    "in the query. This isolates work-boot-intent demand rather than total "
+    "brand demand (which would include apparel for brands like Carhartt and "
+    "Timberland)."
+    '</p>',
+    unsafe_allow_html=True,
+)

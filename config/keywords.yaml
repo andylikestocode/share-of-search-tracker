@@ -17,7 +17,7 @@ competitors:
 
 categories:
   branded:
-    description: "Pure brand demand - the primary SoS number"
+    description: "Brand + boot modifier — the primary SoBIS number. Isolates work-boot intent rather than pure brand demand (so e.g. 'carhartt boots', not 'carhartt jacket')."
     keywords:
       - brunt workwear
       - carhartt boots
