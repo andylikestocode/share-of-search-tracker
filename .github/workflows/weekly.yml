@@ -1,0 +1,41 @@
+name: Weekly Share of Search
+
+on:
+  schedule:
+    # Mondays at 8am ET = 13:00 UTC (during EDT) / 14:00 UTC (during EST)
+    # Using 13:00 UTC so it runs 8am EDT or 9am EST - close enough
+    - cron: "0 13 * * 1"
+  workflow_dispatch:  # allow manual trigger
+
+jobs:
+  run-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run pipeline
+        env:
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+        run: python src/pipeline.py
+
+      - name: Post to Slack
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: python src/slack_notify.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sos-output
+          path: artifacts/
+          retention-days: 90

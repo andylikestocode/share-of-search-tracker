@@ -1,0 +1,84 @@
+# Share of Search keyword taxonomy
+# Edit to add/remove keywords or competitors. After editing, update your
+# Keyword Planner saved list to match.
+
+competitors:
+  brunt: "brunt workwear"
+  carhartt: "carhartt boots"
+  timberland_pro: "timberland pro"
+  red_wing: "red wing boots"
+  thorogood: "thorogood"
+  wolverine: "wolverine boots"
+  keen_utility: "keen utility"
+  danner: "danner boots"
+  georgia_boot: "georgia boot"
+  ariat_work: "ariat work boots"
+  truewerk: "truewerk"
+
+categories:
+  branded:
+    description: "Pure brand demand - the primary SoS number"
+    keywords:
+      - brunt workwear
+      - carhartt boots
+      - timberland pro
+      - red wing boots
+      - thorogood
+      - wolverine boots
+      - keen utility
+      - danner boots
+      - georgia boot
+      - ariat work boots
+      - truewerk
+
+  generic_work_boots:
+    keywords:
+      - work boots
+      - mens work boots
+      - best work boots
+      - waterproof work boots
+      - composite toe boots
+      - steel toe boots
+      - soft toe work boots
+      - pull on work boots
+      - lace up work boots
+
+  trade_specific:
+    keywords:
+      - electrician boots
+      - roofing boots
+      - concrete boots
+      - welding boots
+      - framer boots
+      - plumber boots
+      - mechanic boots
+      - landscaping boots
+      - farm boots
+      - logger boots
+      - oilfield boots
+
+  feature_use_case:
+    keywords:
+      - most comfortable work boots
+      - lightweight work boots
+      - slip resistant work boots
+      - insulated work boots
+      - summer work boots
+      - winter work boots
+
+  consideration:
+    keywords:
+      - brunt vs carhartt
+      - brunt vs red wing
+      - brunt vs thorogood
+      - brunt vs truewerk
+      - best work boot brands
+      - work boots reddit
+
+  workwear_adjacency:
+    keywords:
+      - work pants
+      - work shirts
+      - flannel work shirt
+      - workwear brands
+      - mens workwear
