@@ -64,6 +64,12 @@ def load():
     trade = pd.read_csv(ART / "trade_opportunity.csv")
     cat = pd.read_csv(ART / "category_summary.csv")
     cat["date"] = pd.to_datetime(cat["date"])
+    # Tolerate legacy artifacts where the volume column was named
+    # `avg_monthly_searches` (pre 2026-05 pipeline) so a stale deploy
+    # against fresh code does not KeyError.
+    for d in (trade, cat):
+        if "avg_monthly_searches" in d.columns and "search_volume" not in d.columns:
+            d.rename(columns={"avg_monthly_searches": "search_volume"}, inplace=True)
     return sos, trade, cat
 
 
