@@ -2,8 +2,7 @@
 Share of Search pipeline - Keyword Planner CSV ingestion.
 
 Reads monthly Keyword Planner CSV exports from data/, builds a unified
-history.csv, computes SoS metrics, and writes artifacts for the Slack
-notifier and dashboard.
+history.csv, computes SoS metrics, and writes artifacts for the dashboard.
 
 CSV naming convention: data/YYYY-MM.csv  (e.g., data/2026-05.csv)
 
@@ -196,7 +195,7 @@ def main():
     cat_summary = category_summary(tagged)
     trade = trade_opportunity(tagged)
 
-    # Persist artifacts (these are what the dashboard + Slack read)
+    # Persist artifacts (these are what the dashboard reads)
     tagged.to_csv(ARTIFACTS / "all_keywords_tagged.csv", index=False)
     sos.to_csv(ARTIFACTS / "sos_history.csv", index=False)
     cat_summary.to_csv(ARTIFACTS / "category_summary.csv", index=False)
