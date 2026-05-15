@@ -1,16 +1,14 @@
 """
 Share of Search pipeline - Keyword Planner CSV ingestion.
 
-Reads monthly Keyword Planner CSV exports from data/, builds a unified
-history.csv, computes SoS metrics, and writes artifacts for the dashboard.
+Reads Keyword Planner CSV exports from data/, unpivots the 12 monthly
+"Searches: <Mon> <Year>" columns into long format, builds a unified
+history, computes SoS metrics, and writes artifacts for the dashboard.
 
-CSV naming convention: data/YYYY-MM.csv  (e.g., data/2026-05.csv)
-
-Keyword Planner export columns we care about:
-  - Keyword
-  - Avg. monthly searches
-  - Three month change
-  - YoY change
+CSV naming convention: data/YYYY-MM.csv where YYYY-MM is the LATEST month
+contained in the file (e.g., data/2026-03.csv covers Apr 2025 - Mar 2026).
+When multiple CSVs overlap, the newer file (by filename) wins per
+(keyword, date).
 """
 import re
 import logging
@@ -28,6 +26,14 @@ CONFIG_PATH = ROOT / "config" / "keywords.yaml"
 ARTIFACTS = ROOT / "artifacts"
 
 CSV_NAME_RE = re.compile(r"^(\d{4})-(\d{2})\.csv$")
+MONTHLY_COL_RE = re.compile(
+    r"^\s*Searches:\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{4})\s*$",
+    re.IGNORECASE,
+)
+MONTH_ABBR = {
+    "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
+    "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
+}
 
 
 def load_config() -> dict:
@@ -35,80 +41,88 @@ def load_config() -> dict:
         return yaml.safe_load(f)
 
 
-def parse_keyword_planner_csv(path: Path) -> pd.DataFrame:
-    """
-    Google Keyword Planner CSVs have a non-standard header.
-    First 2 rows are metadata (date range, currency). Actual headers on row 3.
-    Encoding is UTF-16 with tabs. We auto-detect and normalize.
-    """
-    # Keyword Planner exports as UTF-16 tab-delimited by default
-    encodings = ["utf-16", "utf-8", "utf-8-sig"]
-    df = None
-    for enc in encodings:
+def _read_raw(path: Path) -> pd.DataFrame:
+    """Read Keyword Planner CSV across known encodings/delimiters."""
+    attempts = [
+        ("utf-16", "\t"), ("utf-8", "\t"), ("utf-8-sig", "\t"),
+        ("utf-16", ","), ("utf-8", ","), ("utf-8-sig", ","),
+    ]
+    for enc, sep in attempts:
         try:
-            df = pd.read_csv(path, sep="\t", encoding=enc, skiprows=2)
+            df = pd.read_csv(path, sep=sep, encoding=enc, skiprows=2)
             if "Keyword" in df.columns:
-                break
+                return df
         except (UnicodeDecodeError, UnicodeError):
             continue
         except Exception:
             continue
+    raise RuntimeError(f"Could not parse {path.name}. Expected 'Keyword' column.")
 
-    # Fallback: try comma-delimited (if user re-saved as CSV)
-    if df is None or "Keyword" not in df.columns:
-        for enc in encodings:
-            try:
-                df = pd.read_csv(path, encoding=enc, skiprows=2)
-                if "Keyword" in df.columns:
-                    break
-            except Exception:
-                continue
 
-    if df is None or "Keyword" not in df.columns:
-        raise RuntimeError(f"Could not parse {path.name}. Expected 'Keyword' column.")
-
-    # Standardize column names — Keyword Planner uses variations
-    rename_map = {}
-    for c in df.columns:
-        cl = c.lower().strip()
-        if cl == "keyword":
-            rename_map[c] = "keyword"
-        elif "avg" in cl and "search" in cl:
-            rename_map[c] = "avg_monthly_searches"
-        elif "three month" in cl or "3 month" in cl:
-            rename_map[c] = "three_month_change"
-        elif "yoy" in cl or "year over year" in cl:
-            rename_map[c] = "yoy_change"
-    df = df.rename(columns=rename_map)
-
-    required = ["keyword", "avg_monthly_searches"]
-    missing = [c for c in required if c not in df.columns]
-    if missing:
-        raise RuntimeError(f"{path.name} missing columns: {missing}. Columns found: {df.columns.tolist()}")
-
-    # Clean up volume column — Keyword Planner uses comma thousands separators
-    df["avg_monthly_searches"] = (
-        df["avg_monthly_searches"].astype(str)
+def _parse_volume(series: pd.Series) -> pd.Series:
+    """Strip commas/quotes from Keyword Planner volumes and coerce to numeric."""
+    cleaned = (
+        series.astype(str)
         .str.replace(",", "", regex=False)
         .str.replace('"', "", regex=False)
         .str.strip()
     )
-    df["avg_monthly_searches"] = pd.to_numeric(df["avg_monthly_searches"], errors="coerce").fillna(0)
-    df["keyword"] = df["keyword"].astype(str).str.lower().str.strip()
+    return pd.to_numeric(cleaned, errors="coerce").fillna(0)
 
-    # Date = first day of the month parsed from filename
-    m = CSV_NAME_RE.match(path.name)
-    if not m:
+
+def parse_keyword_planner_csv(path: Path) -> pd.DataFrame:
+    """
+    Unpivot the 12 monthly "Searches: <Mon> <Year>" columns into long format.
+    Returns a DataFrame with columns (keyword, date, search_volume).
+    """
+    df = _read_raw(path)
+
+    # Locate keyword + monthly columns
+    kw_col = next((c for c in df.columns if c.lower().strip() == "keyword"), None)
+    if kw_col is None:
+        raise RuntimeError(f"{path.name}: missing 'Keyword' column.")
+
+    month_cols = {}  # original_col_name -> Timestamp(first-of-month)
+    for c in df.columns:
+        m = MONTHLY_COL_RE.match(str(c))
+        if m:
+            mon = MONTH_ABBR[m.group(1).lower()]
+            year = int(m.group(2))
+            month_cols[c] = pd.Timestamp(year=year, month=mon, day=1)
+
+    if not month_cols:
+        raise RuntimeError(
+            f"{path.name}: no monthly 'Searches: <Mon> <Year>' columns found. "
+            f"Re-export from Keyword Planner with monthly breakdown enabled. "
+            f"Columns found: {df.columns.tolist()}"
+        )
+
+    if len(month_cols) != 12:
+        log.warning(
+            f"{path.name}: expected 12 monthly columns, found {len(month_cols)}: "
+            f"{sorted(month_cols.values())}"
+        )
+
+    df[kw_col] = df[kw_col].astype(str).str.lower().str.strip()
+    # Drop the metadata rows at the top (no keyword value)
+    df = df[df[kw_col].notna() & (df[kw_col] != "") & (df[kw_col] != "nan")]
+
+    long = df[[kw_col] + list(month_cols.keys())].melt(
+        id_vars=[kw_col], var_name="_month_col", value_name="search_volume"
+    )
+    long = long.rename(columns={kw_col: "keyword"})
+    long["date"] = long["_month_col"].map(month_cols)
+    long["search_volume"] = _parse_volume(long["search_volume"])
+    long = long.drop(columns=["_month_col"])
+
+    # Track filename recency so cross-file dedupe can prefer the newer export
+    fname_match = CSV_NAME_RE.match(path.name)
+    if not fname_match:
         raise RuntimeError(f"Bad filename {path.name}. Expected format YYYY-MM.csv")
-    year, month = int(m.group(1)), int(m.group(2))
-    df["date"] = pd.Timestamp(year=year, month=month, day=1)
+    fyear, fmonth = int(fname_match.group(1)), int(fname_match.group(2))
+    long["_source_rank"] = fyear * 100 + fmonth
 
-    keep = ["date", "keyword", "avg_monthly_searches"]
-    if "three_month_change" in df.columns:
-        keep.append("three_month_change")
-    if "yoy_change" in df.columns:
-        keep.append("yoy_change")
-    return df[keep]
+    return long[["date", "keyword", "search_volume", "_source_rank"]]
 
 
 def ingest_all_csvs() -> pd.DataFrame:
@@ -120,8 +134,17 @@ def ingest_all_csvs() -> pd.DataFrame:
     log.info(f"Found {len(files)} monthly export(s): {[f.name for f in files]}")
     frames = [parse_keyword_planner_csv(f) for f in files]
     df = pd.concat(frames, ignore_index=True)
-    df = df.drop_duplicates(subset=["date", "keyword"], keep="last")
-    log.info(f"Combined: {len(df)} rows, {df['keyword'].nunique()} unique keywords, {df['date'].nunique()} months")
+
+    # When CSVs overlap, keep the row from the most recently named file.
+    df = df.sort_values(["keyword", "date", "_source_rank"])
+    df = df.drop_duplicates(subset=["keyword", "date"], keep="last")
+    df = df.drop(columns=["_source_rank"]).reset_index(drop=True)
+
+    log.info(
+        f"Combined: {len(df)} rows, {df['keyword'].nunique()} unique keywords, "
+        f"{df['date'].nunique()} months "
+        f"({df['date'].min().strftime('%Y-%m')} → {df['date'].max().strftime('%Y-%m')})"
+    )
     return df
 
 
@@ -144,8 +167,7 @@ def tag_keywords(df: pd.DataFrame, config: dict) -> pd.DataFrame:
 def calculate_sos(df: pd.DataFrame) -> pd.DataFrame:
     """SoS per competitor per month, restricted to branded keywords."""
     branded = df[df["category"] == "branded"].copy()
-    monthly = branded.groupby(["date", "competitor"], as_index=False)["avg_monthly_searches"].sum()
-    monthly = monthly.rename(columns={"avg_monthly_searches": "search_volume"})
+    monthly = branded.groupby(["date", "competitor"], as_index=False)["search_volume"].sum()
     monthly["total_category"] = monthly.groupby("date")["search_volume"].transform("sum")
     monthly["sos_pct"] = (monthly["search_volume"] / monthly["total_category"] * 100).round(2)
     return monthly.sort_values(["date", "sos_pct"], ascending=[True, False])
@@ -167,16 +189,16 @@ def calculate_deltas(sos: pd.DataFrame) -> pd.DataFrame:
 
 def category_summary(df: pd.DataFrame) -> pd.DataFrame:
     """Total volume per category per month — shows where demand sits."""
-    summary = df.groupby(["date", "category"], as_index=False)["avg_monthly_searches"].sum()
-    return summary.sort_values(["date", "avg_monthly_searches"], ascending=[True, False])
+    summary = df.groupby(["date", "category"], as_index=False)["search_volume"].sum()
+    return summary.sort_values(["date", "search_volume"], ascending=[True, False])
 
 
 def trade_opportunity(df: pd.DataFrame) -> pd.DataFrame:
     """Latest-month volume for trade-specific keywords — BRUNT's wedge opportunity."""
     latest = df["date"].max()
     trade = df[(df["date"] == latest) & (df["category"] == "trade_specific")]
-    return trade[["keyword", "avg_monthly_searches"]].sort_values(
-        "avg_monthly_searches", ascending=False
+    return trade[["keyword", "search_volume"]].sort_values(
+        "search_volume", ascending=False
     )
 
 
@@ -195,7 +217,6 @@ def main():
     cat_summary = category_summary(tagged)
     trade = trade_opportunity(tagged)
 
-    # Persist artifacts (these are what the dashboard reads)
     tagged.to_csv(ARTIFACTS / "all_keywords_tagged.csv", index=False)
     sos.to_csv(ARTIFACTS / "sos_history.csv", index=False)
     cat_summary.to_csv(ARTIFACTS / "category_summary.csv", index=False)

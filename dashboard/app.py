@@ -165,7 +165,7 @@ with col_right:
     st.caption("BRUNT's wedge — where tradespeople search")
     trade_disp = trade.head(11).rename(columns={
         "keyword": "Keyword",
-        "avg_monthly_searches": "Searches/mo",
+        "search_volume": "Searches/mo",
     })
     trade_disp["Searches/mo"] = trade_disp["Searches/mo"].astype(int).map("{:,}".format)
     st.dataframe(trade_disp, use_container_width=True, hide_index=True)
@@ -175,7 +175,7 @@ st.markdown("---")
 st.markdown("### Category Demand Pool")
 st.caption("Total search volume in each category, by month")
 
-cat_pivot = cat.pivot(index="date", columns="category", values="avg_monthly_searches").fillna(0)
+cat_pivot = cat.pivot(index="date", columns="category", values="search_volume").fillna(0)
 fig2 = go.Figure()
 cat_colors = {
     "branded": "#ff6b00",

@@ -28,6 +28,10 @@ ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "config" / "keywords.yaml"
 DATA_DIR = ROOT / "data"
 CSV_NAME_RE = re.compile(r"^(\d{4})-(\d{2})\.csv$")
+MONTHLY_COL_RE = re.compile(
+    r"^\s*Searches:\s*(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)\s+(\d{4})\s*$",
+    re.IGNORECASE,
+)
 
 # Colors for terminal output
 GREEN = "\033[92m"
@@ -86,6 +90,16 @@ def find_volume_column(df: pd.DataFrame):
     return None
 
 
+def find_monthly_columns(df: pd.DataFrame):
+    """Returns list of (column_name, year, month) for "Searches: <Mon> <Year>" columns."""
+    found = []
+    for c in df.columns:
+        m = MONTHLY_COL_RE.match(str(c))
+        if m:
+            found.append((c, int(m.group(2)), m.group(1).title()))
+    return found
+
+
 def find_keyword_column(df: pd.DataFrame):
     for c in df.columns:
         if c.lower().strip() == "keyword":
@@ -100,9 +114,10 @@ def detect_bucketed_volumes(series: pd.Series) -> int:
         re.compile(r"^\s*<\s*\d+", re.IGNORECASE),
     ]
     count = 0
-    for v in series.astype(str):
+    for v in series:
+        s = str(v) if v is not None else ""
         for pat in bucket_patterns:
-            if pat.match(v):
+            if pat.match(s):
                 count += 1
                 break
     return count
@@ -138,33 +153,50 @@ def validate(path: Path) -> bool:
 
     # 3. Required columns
     kw_col = find_keyword_column(df)
-    vol_col = find_volume_column(df)
     if not kw_col:
         err(f"Missing 'Keyword' column. Found columns: {df.columns.tolist()}")
         return False
     ok(f"Found keyword column: '{kw_col}'")
 
-    if not vol_col:
-        err(f"Missing 'Avg. monthly searches' column. Found columns: {df.columns.tolist()}")
+    monthly_cols = find_monthly_columns(df)
+    if not monthly_cols:
+        err("Missing the 12 monthly 'Searches: <Mon> <Year>' columns.")
+        info("  Your export looks like an aggregate-only report — the pipeline now needs the")
+        info("  monthly breakdown to backfill 12 months of history per CSV.")
+        info("  In Keyword Planner: open your saved plan → 'Historical metrics' tab →")
+        info("  use the column chooser to enable 'Searches: <Month>' for the last 12 months,")
+        info("  then export.")
+        info(f"  Found columns: {df.columns.tolist()}")
         return False
-    ok(f"Found volume column: '{vol_col}'")
+    ok(f"Found {len(monthly_cols)} monthly Searches columns")
+    if len(monthly_cols) != 12:
+        warn(f"Expected 12 monthly columns, found {len(monthly_cols)}: "
+             f"{[f'{m} {y}' for _, y, m in monthly_cols]}")
+        info("  Pipeline will still ingest, but history will be partial.")
 
-    # 4. Volume format check (bucketed vs precise)
-    bucket_count = detect_bucketed_volumes(df[vol_col])
+    vol_col = find_volume_column(df)
+    if vol_col:
+        ok(f"Found aggregate volume column: '{vol_col}' (informational only — pipeline uses monthly)")
+
+    # 4. Volume format check (bucketed vs precise) — sample the monthly columns
     total_rows = len(df)
+    bucket_count = 0
+    for c, _, _ in monthly_cols:
+        bucket_count += detect_bucketed_volumes(df[c])
     if bucket_count > 0:
-        bucket_pct = bucket_count / total_rows * 100
+        total_cells = total_rows * len(monthly_cols)
+        bucket_pct = bucket_count / total_cells * 100
         if bucket_pct > 50:
-            err(f"{bucket_count}/{total_rows} rows ({bucket_pct:.0f}%) have BUCKETED volumes "
-                f"(e.g. '1K - 10K'), not precise numbers.")
+            err(f"{bucket_count}/{total_cells} cells ({bucket_pct:.0f}%) across monthly "
+                f"columns have BUCKETED volumes (e.g. '1K - 10K'), not precise numbers.")
             info("  This means the Google Ads account doesn't have enough spend for exact data.")
             info("  Try exporting from a higher-spend BRUNT Google Ads account.")
             return False
         else:
-            warn(f"{bucket_count}/{total_rows} rows ({bucket_pct:.0f}%) have bucketed volumes.")
+            warn(f"{bucket_count}/{total_cells} cells ({bucket_pct:.0f}%) have bucketed volumes.")
             info("  Pipeline will treat these as 0. Higher-spend account would give exact numbers.")
     else:
-        ok("All volumes are precise numbers (not bucketed)")
+        ok("All monthly volumes are precise numbers (not bucketed)")
 
     # 5. Keyword coverage check vs config
     with open(CONFIG_PATH) as f:
