@@ -1,50 +1,577 @@
-date,keyword,avg_monthly_searches,three_month_change,yoy_change,category,competitor
-2026-03-01,,1345240.0,,,uncategorized,
-2026-03-01,ariat work boots,60500.0,0%,0%,branded,ariat_work
-2026-03-01,best work boot brands,1900.0,0%,-21%,consideration,
-2026-03-01,best work boots,12100.0,0%,-18%,generic_work_boots,
-2026-03-01,brunt vs carhartt,30.0,-50%,100%,consideration,
-2026-03-01,brunt vs red wing,30.0,-50%,100%,consideration,
-2026-03-01,brunt vs thorogood,210.0,-19%,-56%,consideration,
-2026-03-01,brunt vs truewerk,50.0,25%,150%,consideration,
-2026-03-01,brunt workwear,60500.0,-18%,49%,branded,brunt
-2026-03-01,carhartt boots,22200.0,-45%,-18%,branded,carhartt
-2026-03-01,composite toe boots,14800.0,0%,0%,generic_work_boots,
-2026-03-01,concrete boots,2400.0,26%,0%,trade_specific,
-2026-03-01,danner boots,110000.0,-33%,-18%,branded,danner
-2026-03-01,electrician boots,1600.0,0%,0%,trade_specific,
-2026-03-01,farm boots,3600.0,24%,0%,trade_specific,
-2026-03-01,flannel work shirt,480.0,-34%,0%,workwear_adjacency,
-2026-03-01,framer boots,210.0,-72%,-48%,trade_specific,
-2026-03-01,georgia boot,40500.0,-18%,-18%,branded,georgia_boot
-2026-03-01,insulated work boots,5400.0,-91%,-12%,feature_use_case,
-2026-03-01,keen utility,2900.0,-18%,24%,branded,keen_utility
-2026-03-01,lace up work boots,2400.0,0%,-17%,generic_work_boots,
-2026-03-01,landscaping boots,720.0,156%,-23%,trade_specific,
-2026-03-01,lightweight work boots,6600.0,0%,22%,feature_use_case,
-2026-03-01,logger boots,6600.0,-19%,-19%,trade_specific,
-2026-03-01,mechanic boots,1000.0,0%,-23%,trade_specific,
-2026-03-01,mens work boots,90500.0,0%,0%,generic_work_boots,
-2026-03-01,mens workwear,8100.0,0%,-19%,workwear_adjacency,
-2026-03-01,most comfortable work boots,9900.0,0%,-18%,feature_use_case,
-2026-03-01,oilfield boots,110.0,-21%,-21%,trade_specific,
-2026-03-01,plumber boots,720.0,22%,0%,trade_specific,
-2026-03-01,pull on work boots,2900.0,0%,-19%,generic_work_boots,
-2026-03-01,red wing boots,301000.0,-18%,0%,branded,red_wing
-2026-03-01,roofing boots,8100.0,84%,23%,trade_specific,
-2026-03-01,slip resistant work boots,2400.0,-32%,30%,feature_use_case,
-2026-03-01,soft toe work boots,1600.0,0%,0%,generic_work_boots,
-2026-03-01,steel toe boots,90500.0,0%,0%,generic_work_boots,
-2026-03-01,summer work boots,720.0,400%,-19%,feature_use_case,
-2026-03-01,thorogood,22200.0,-18%,0%,branded,thorogood
-2026-03-01,timberland pro,27100.0,-18%,0%,branded,timberland_pro
-2026-03-01,truewerk,60500.0,-18%,0%,branded,truewerk
-2026-03-01,waterproof work boots,49500.0,-84%,236%,generic_work_boots,
-2026-03-01,welding boots,3600.0,-19%,-19%,trade_specific,
-2026-03-01,winter work boots,3600.0,-93%,-19%,feature_use_case,
-2026-03-01,wolverine boots,74000.0,-18%,0%,branded,wolverine
-2026-03-01,work boots,165000.0,0%,0%,generic_work_boots,
-2026-03-01,work boots reddit,260.0,-19%,0%,consideration,
-2026-03-01,work pants,49500.0,22%,0%,workwear_adjacency,
-2026-03-01,work shirts,14800.0,49%,-18%,workwear_adjacency,
-2026-03-01,workwear brands,1900.0,238%,238%,workwear_adjacency,
+date,keyword,search_volume,category,competitor
+2025-04-01,ariat work boots,49500.0,branded,ariat_work
+2025-05-01,ariat work boots,49500.0,branded,ariat_work
+2025-06-01,ariat work boots,40500.0,branded,ariat_work
+2025-07-01,ariat work boots,49500.0,branded,ariat_work
+2025-08-01,ariat work boots,60500.0,branded,ariat_work
+2025-09-01,ariat work boots,60500.0,branded,ariat_work
+2025-10-01,ariat work boots,60500.0,branded,ariat_work
+2025-11-01,ariat work boots,74000.0,branded,ariat_work
+2025-12-01,ariat work boots,60500.0,branded,ariat_work
+2026-01-01,ariat work boots,49500.0,branded,ariat_work
+2026-02-01,ariat work boots,49500.0,branded,ariat_work
+2026-03-01,ariat work boots,49500.0,branded,ariat_work
+2025-04-01,best work boot brands,2400.0,consideration,
+2025-05-01,best work boot brands,2400.0,consideration,
+2025-06-01,best work boot brands,1900.0,consideration,
+2025-07-01,best work boot brands,1900.0,consideration,
+2025-08-01,best work boot brands,1900.0,consideration,
+2025-09-01,best work boot brands,1900.0,consideration,
+2025-10-01,best work boot brands,2400.0,consideration,
+2025-11-01,best work boot brands,2900.0,consideration,
+2025-12-01,best work boot brands,2900.0,consideration,
+2026-01-01,best work boot brands,1900.0,consideration,
+2026-02-01,best work boot brands,1900.0,consideration,
+2026-03-01,best work boot brands,1900.0,consideration,
+2025-04-01,best work boots,14800.0,generic_work_boots,
+2025-05-01,best work boots,14800.0,generic_work_boots,
+2025-06-01,best work boots,12100.0,generic_work_boots,
+2025-07-01,best work boots,12100.0,generic_work_boots,
+2025-08-01,best work boots,12100.0,generic_work_boots,
+2025-09-01,best work boots,12100.0,generic_work_boots,
+2025-10-01,best work boots,14800.0,generic_work_boots,
+2025-11-01,best work boots,14800.0,generic_work_boots,
+2025-12-01,best work boots,14800.0,generic_work_boots,
+2026-01-01,best work boots,12100.0,generic_work_boots,
+2026-02-01,best work boots,12100.0,generic_work_boots,
+2026-03-01,best work boots,12100.0,generic_work_boots,
+2025-04-01,brunt vs carhartt,10.0,consideration,
+2025-05-01,brunt vs carhartt,10.0,consideration,
+2025-06-01,brunt vs carhartt,10.0,consideration,
+2025-07-01,brunt vs carhartt,10.0,consideration,
+2025-08-01,brunt vs carhartt,10.0,consideration,
+2025-09-01,brunt vs carhartt,20.0,consideration,
+2025-10-01,brunt vs carhartt,90.0,consideration,
+2025-11-01,brunt vs carhartt,90.0,consideration,
+2025-12-01,brunt vs carhartt,90.0,consideration,
+2026-01-01,brunt vs carhartt,40.0,consideration,
+2026-02-01,brunt vs carhartt,30.0,consideration,
+2026-03-01,brunt vs carhartt,20.0,consideration,
+2025-04-01,brunt vs red wing,30.0,consideration,
+2025-05-01,brunt vs red wing,40.0,consideration,
+2025-06-01,brunt vs red wing,30.0,consideration,
+2025-07-01,brunt vs red wing,20.0,consideration,
+2025-08-01,brunt vs red wing,20.0,consideration,
+2025-09-01,brunt vs red wing,10.0,consideration,
+2025-10-01,brunt vs red wing,30.0,consideration,
+2025-11-01,brunt vs red wing,20.0,consideration,
+2025-12-01,brunt vs red wing,30.0,consideration,
+2026-01-01,brunt vs red wing,40.0,consideration,
+2026-02-01,brunt vs red wing,30.0,consideration,
+2026-03-01,brunt vs red wing,20.0,consideration,
+2025-04-01,brunt vs thorogood,390.0,consideration,
+2025-05-01,brunt vs thorogood,260.0,consideration,
+2025-06-01,brunt vs thorogood,210.0,consideration,
+2025-07-01,brunt vs thorogood,210.0,consideration,
+2025-08-01,brunt vs thorogood,170.0,consideration,
+2025-09-01,brunt vs thorogood,210.0,consideration,
+2025-10-01,brunt vs thorogood,210.0,consideration,
+2025-11-01,brunt vs thorogood,260.0,consideration,
+2025-12-01,brunt vs thorogood,210.0,consideration,
+2026-01-01,brunt vs thorogood,260.0,consideration,
+2026-02-01,brunt vs thorogood,210.0,consideration,
+2026-03-01,brunt vs thorogood,210.0,consideration,
+2025-04-01,brunt vs truewerk,40.0,consideration,
+2025-05-01,brunt vs truewerk,40.0,consideration,
+2025-06-01,brunt vs truewerk,70.0,consideration,
+2025-07-01,brunt vs truewerk,50.0,consideration,
+2025-08-01,brunt vs truewerk,50.0,consideration,
+2025-09-01,brunt vs truewerk,40.0,consideration,
+2025-10-01,brunt vs truewerk,70.0,consideration,
+2025-11-01,brunt vs truewerk,50.0,consideration,
+2025-12-01,brunt vs truewerk,30.0,consideration,
+2026-01-01,brunt vs truewerk,40.0,consideration,
+2026-02-01,brunt vs truewerk,30.0,consideration,
+2026-03-01,brunt vs truewerk,50.0,consideration,
+2025-04-01,brunt workwear,49500.0,branded,brunt
+2025-05-01,brunt workwear,49500.0,branded,brunt
+2025-06-01,brunt workwear,49500.0,branded,brunt
+2025-07-01,brunt workwear,40500.0,branded,brunt
+2025-08-01,brunt workwear,40500.0,branded,brunt
+2025-09-01,brunt workwear,49500.0,branded,brunt
+2025-10-01,brunt workwear,90500.0,branded,brunt
+2025-11-01,brunt workwear,110000.0,branded,brunt
+2025-12-01,brunt workwear,90500.0,branded,brunt
+2026-01-01,brunt workwear,74000.0,branded,brunt
+2026-02-01,brunt workwear,60500.0,branded,brunt
+2026-03-01,brunt workwear,60500.0,branded,brunt
+2025-04-01,carhartt boots,14800.0,branded,carhartt
+2025-05-01,carhartt boots,14800.0,branded,carhartt
+2025-06-01,carhartt boots,12100.0,branded,carhartt
+2025-07-01,carhartt boots,12100.0,branded,carhartt
+2025-08-01,carhartt boots,14800.0,branded,carhartt
+2025-09-01,carhartt boots,18100.0,branded,carhartt
+2025-10-01,carhartt boots,22200.0,branded,carhartt
+2025-11-01,carhartt boots,33100.0,branded,carhartt
+2025-12-01,carhartt boots,40500.0,branded,carhartt
+2026-01-01,carhartt boots,27100.0,branded,carhartt
+2026-02-01,carhartt boots,18100.0,branded,carhartt
+2026-03-01,carhartt boots,14800.0,branded,carhartt
+2025-04-01,composite toe boots,12100.0,generic_work_boots,
+2025-05-01,composite toe boots,12100.0,generic_work_boots,
+2025-06-01,composite toe boots,12100.0,generic_work_boots,
+2025-07-01,composite toe boots,12100.0,generic_work_boots,
+2025-08-01,composite toe boots,18100.0,generic_work_boots,
+2025-09-01,composite toe boots,18100.0,generic_work_boots,
+2025-10-01,composite toe boots,18100.0,generic_work_boots,
+2025-11-01,composite toe boots,14800.0,generic_work_boots,
+2025-12-01,composite toe boots,14800.0,generic_work_boots,
+2026-01-01,composite toe boots,14800.0,generic_work_boots,
+2026-02-01,composite toe boots,14800.0,generic_work_boots,
+2026-03-01,composite toe boots,14800.0,generic_work_boots,
+2025-04-01,concrete boots,2400.0,trade_specific,
+2025-05-01,concrete boots,2900.0,trade_specific,
+2025-06-01,concrete boots,2900.0,trade_specific,
+2025-07-01,concrete boots,2400.0,trade_specific,
+2025-08-01,concrete boots,2400.0,trade_specific,
+2025-09-01,concrete boots,2400.0,trade_specific,
+2025-10-01,concrete boots,2400.0,trade_specific,
+2025-11-01,concrete boots,2400.0,trade_specific,
+2025-12-01,concrete boots,1900.0,trade_specific,
+2026-01-01,concrete boots,1900.0,trade_specific,
+2026-02-01,concrete boots,1900.0,trade_specific,
+2026-03-01,concrete boots,2400.0,trade_specific,
+2025-04-01,danner boots,90500.0,branded,danner
+2025-05-01,danner boots,90500.0,branded,danner
+2025-06-01,danner boots,90500.0,branded,danner
+2025-07-01,danner boots,74000.0,branded,danner
+2025-08-01,danner boots,90500.0,branded,danner
+2025-09-01,danner boots,110000.0,branded,danner
+2025-10-01,danner boots,135000.0,branded,danner
+2025-11-01,danner boots,201000.0,branded,danner
+2025-12-01,danner boots,201000.0,branded,danner
+2026-01-01,danner boots,135000.0,branded,danner
+2026-02-01,danner boots,110000.0,branded,danner
+2026-03-01,danner boots,90500.0,branded,danner
+2025-04-01,electrician boots,1600.0,trade_specific,
+2025-05-01,electrician boots,1600.0,trade_specific,
+2025-06-01,electrician boots,1600.0,trade_specific,
+2025-07-01,electrician boots,1600.0,trade_specific,
+2025-08-01,electrician boots,1900.0,trade_specific,
+2025-09-01,electrician boots,1600.0,trade_specific,
+2025-10-01,electrician boots,1600.0,trade_specific,
+2025-11-01,electrician boots,1600.0,trade_specific,
+2025-12-01,electrician boots,1600.0,trade_specific,
+2026-01-01,electrician boots,1600.0,trade_specific,
+2026-02-01,electrician boots,1300.0,trade_specific,
+2026-03-01,electrician boots,1600.0,trade_specific,
+2025-04-01,farm boots,3600.0,trade_specific,
+2025-05-01,farm boots,4400.0,trade_specific,
+2025-06-01,farm boots,3600.0,trade_specific,
+2025-07-01,farm boots,2900.0,trade_specific,
+2025-08-01,farm boots,3600.0,trade_specific,
+2025-09-01,farm boots,3600.0,trade_specific,
+2025-10-01,farm boots,4400.0,trade_specific,
+2025-11-01,farm boots,3600.0,trade_specific,
+2025-12-01,farm boots,3600.0,trade_specific,
+2026-01-01,farm boots,2900.0,trade_specific,
+2026-02-01,farm boots,2900.0,trade_specific,
+2026-03-01,farm boots,3600.0,trade_specific,
+2025-04-01,flannel work shirt,390.0,workwear_adjacency,
+2025-05-01,flannel work shirt,210.0,workwear_adjacency,
+2025-06-01,flannel work shirt,260.0,workwear_adjacency,
+2025-07-01,flannel work shirt,260.0,workwear_adjacency,
+2025-08-01,flannel work shirt,320.0,workwear_adjacency,
+2025-09-01,flannel work shirt,480.0,workwear_adjacency,
+2025-10-01,flannel work shirt,880.0,workwear_adjacency,
+2025-11-01,flannel work shirt,880.0,workwear_adjacency,
+2025-12-01,flannel work shirt,880.0,workwear_adjacency,
+2026-01-01,flannel work shirt,590.0,workwear_adjacency,
+2026-02-01,flannel work shirt,320.0,workwear_adjacency,
+2026-03-01,flannel work shirt,390.0,workwear_adjacency,
+2025-04-01,framer boots,140.0,trade_specific,
+2025-05-01,framer boots,210.0,trade_specific,
+2025-06-01,framer boots,170.0,trade_specific,
+2025-07-01,framer boots,140.0,trade_specific,
+2025-08-01,framer boots,170.0,trade_specific,
+2025-09-01,framer boots,260.0,trade_specific,
+2025-10-01,framer boots,320.0,trade_specific,
+2025-11-01,framer boots,320.0,trade_specific,
+2025-12-01,framer boots,320.0,trade_specific,
+2026-01-01,framer boots,390.0,trade_specific,
+2026-02-01,framer boots,210.0,trade_specific,
+2026-03-01,framer boots,110.0,trade_specific,
+2025-04-01,georgia boot,40500.0,branded,georgia_boot
+2025-05-01,georgia boot,40500.0,branded,georgia_boot
+2025-06-01,georgia boot,33100.0,branded,georgia_boot
+2025-07-01,georgia boot,33100.0,branded,georgia_boot
+2025-08-01,georgia boot,40500.0,branded,georgia_boot
+2025-09-01,georgia boot,40500.0,branded,georgia_boot
+2025-10-01,georgia boot,49500.0,branded,georgia_boot
+2025-11-01,georgia boot,60500.0,branded,georgia_boot
+2025-12-01,georgia boot,60500.0,branded,georgia_boot
+2026-01-01,georgia boot,49500.0,branded,georgia_boot
+2026-02-01,georgia boot,40500.0,branded,georgia_boot
+2026-03-01,georgia boot,40500.0,branded,georgia_boot
+2025-04-01,insulated work boots,590.0,feature_use_case,
+2025-05-01,insulated work boots,590.0,feature_use_case,
+2025-06-01,insulated work boots,480.0,feature_use_case,
+2025-07-01,insulated work boots,720.0,feature_use_case,
+2025-08-01,insulated work boots,1600.0,feature_use_case,
+2025-09-01,insulated work boots,2900.0,feature_use_case,
+2025-10-01,insulated work boots,6600.0,feature_use_case,
+2025-11-01,insulated work boots,14800.0,feature_use_case,
+2025-12-01,insulated work boots,18100.0,feature_use_case,
+2026-01-01,insulated work boots,9900.0,feature_use_case,
+2026-02-01,insulated work boots,3600.0,feature_use_case,
+2026-03-01,insulated work boots,880.0,feature_use_case,
+2025-04-01,keen utility,2400.0,branded,keen_utility
+2025-05-01,keen utility,2900.0,branded,keen_utility
+2025-06-01,keen utility,2400.0,branded,keen_utility
+2025-07-01,keen utility,2900.0,branded,keen_utility
+2025-08-01,keen utility,2900.0,branded,keen_utility
+2025-09-01,keen utility,3600.0,branded,keen_utility
+2025-10-01,keen utility,3600.0,branded,keen_utility
+2025-11-01,keen utility,3600.0,branded,keen_utility
+2025-12-01,keen utility,3600.0,branded,keen_utility
+2026-01-01,keen utility,4400.0,branded,keen_utility
+2026-02-01,keen utility,2900.0,branded,keen_utility
+2026-03-01,keen utility,3600.0,branded,keen_utility
+2025-04-01,lace up work boots,2400.0,generic_work_boots,
+2025-05-01,lace up work boots,2400.0,generic_work_boots,
+2025-06-01,lace up work boots,2400.0,generic_work_boots,
+2025-07-01,lace up work boots,2400.0,generic_work_boots,
+2025-08-01,lace up work boots,2400.0,generic_work_boots,
+2025-09-01,lace up work boots,2400.0,generic_work_boots,
+2025-10-01,lace up work boots,2900.0,generic_work_boots,
+2025-11-01,lace up work boots,2400.0,generic_work_boots,
+2025-12-01,lace up work boots,2400.0,generic_work_boots,
+2026-01-01,lace up work boots,2400.0,generic_work_boots,
+2026-02-01,lace up work boots,2400.0,generic_work_boots,
+2026-03-01,lace up work boots,2400.0,generic_work_boots,
+2025-04-01,landscaping boots,1300.0,trade_specific,
+2025-05-01,landscaping boots,1600.0,trade_specific,
+2025-06-01,landscaping boots,1000.0,trade_specific,
+2025-07-01,landscaping boots,880.0,trade_specific,
+2025-08-01,landscaping boots,720.0,trade_specific,
+2025-09-01,landscaping boots,590.0,trade_specific,
+2025-10-01,landscaping boots,480.0,trade_specific,
+2025-11-01,landscaping boots,390.0,trade_specific,
+2025-12-01,landscaping boots,390.0,trade_specific,
+2026-01-01,landscaping boots,390.0,trade_specific,
+2026-02-01,landscaping boots,480.0,trade_specific,
+2026-03-01,landscaping boots,1000.0,trade_specific,
+2025-04-01,lightweight work boots,5400.0,feature_use_case,
+2025-05-01,lightweight work boots,5400.0,feature_use_case,
+2025-06-01,lightweight work boots,5400.0,feature_use_case,
+2025-07-01,lightweight work boots,4400.0,feature_use_case,
+2025-08-01,lightweight work boots,8100.0,feature_use_case,
+2025-09-01,lightweight work boots,9900.0,feature_use_case,
+2025-10-01,lightweight work boots,12100.0,feature_use_case,
+2025-11-01,lightweight work boots,6600.0,feature_use_case,
+2025-12-01,lightweight work boots,5400.0,feature_use_case,
+2026-01-01,lightweight work boots,6600.0,feature_use_case,
+2026-02-01,lightweight work boots,5400.0,feature_use_case,
+2026-03-01,lightweight work boots,6600.0,feature_use_case,
+2025-04-01,logger boots,6600.0,trade_specific,
+2025-05-01,logger boots,6600.0,trade_specific,
+2025-06-01,logger boots,5400.0,trade_specific,
+2025-07-01,logger boots,5400.0,trade_specific,
+2025-08-01,logger boots,6600.0,trade_specific,
+2025-09-01,logger boots,6600.0,trade_specific,
+2025-10-01,logger boots,8100.0,trade_specific,
+2025-11-01,logger boots,8100.0,trade_specific,
+2025-12-01,logger boots,8100.0,trade_specific,
+2026-01-01,logger boots,8100.0,trade_specific,
+2026-02-01,logger boots,8100.0,trade_specific,
+2026-03-01,logger boots,6600.0,trade_specific,
+2025-04-01,mechanic boots,1000.0,trade_specific,
+2025-05-01,mechanic boots,1000.0,trade_specific,
+2025-06-01,mechanic boots,1000.0,trade_specific,
+2025-07-01,mechanic boots,1000.0,trade_specific,
+2025-08-01,mechanic boots,1300.0,trade_specific,
+2025-09-01,mechanic boots,1300.0,trade_specific,
+2025-10-01,mechanic boots,1300.0,trade_specific,
+2025-11-01,mechanic boots,1300.0,trade_specific,
+2025-12-01,mechanic boots,1300.0,trade_specific,
+2026-01-01,mechanic boots,1000.0,trade_specific,
+2026-02-01,mechanic boots,1000.0,trade_specific,
+2026-03-01,mechanic boots,1000.0,trade_specific,
+2025-04-01,mens work boots,74000.0,generic_work_boots,
+2025-05-01,mens work boots,74000.0,generic_work_boots,
+2025-06-01,mens work boots,74000.0,generic_work_boots,
+2025-07-01,mens work boots,74000.0,generic_work_boots,
+2025-08-01,mens work boots,90500.0,generic_work_boots,
+2025-09-01,mens work boots,90500.0,generic_work_boots,
+2025-10-01,mens work boots,110000.0,generic_work_boots,
+2025-11-01,mens work boots,135000.0,generic_work_boots,
+2025-12-01,mens work boots,135000.0,generic_work_boots,
+2026-01-01,mens work boots,90500.0,generic_work_boots,
+2026-02-01,mens work boots,90500.0,generic_work_boots,
+2026-03-01,mens work boots,90500.0,generic_work_boots,
+2025-04-01,mens workwear,6600.0,workwear_adjacency,
+2025-05-01,mens workwear,6600.0,workwear_adjacency,
+2025-06-01,mens workwear,6600.0,workwear_adjacency,
+2025-07-01,mens workwear,5400.0,workwear_adjacency,
+2025-08-01,mens workwear,6600.0,workwear_adjacency,
+2025-09-01,mens workwear,6600.0,workwear_adjacency,
+2025-10-01,mens workwear,9900.0,workwear_adjacency,
+2025-11-01,mens workwear,9900.0,workwear_adjacency,
+2025-12-01,mens workwear,9900.0,workwear_adjacency,
+2026-01-01,mens workwear,6600.0,workwear_adjacency,
+2026-02-01,mens workwear,5400.0,workwear_adjacency,
+2026-03-01,mens workwear,6600.0,workwear_adjacency,
+2025-04-01,most comfortable work boots,9900.0,feature_use_case,
+2025-05-01,most comfortable work boots,9900.0,feature_use_case,
+2025-06-01,most comfortable work boots,8100.0,feature_use_case,
+2025-07-01,most comfortable work boots,8100.0,feature_use_case,
+2025-08-01,most comfortable work boots,9900.0,feature_use_case,
+2025-09-01,most comfortable work boots,9900.0,feature_use_case,
+2025-10-01,most comfortable work boots,12100.0,feature_use_case,
+2025-11-01,most comfortable work boots,12100.0,feature_use_case,
+2025-12-01,most comfortable work boots,9900.0,feature_use_case,
+2026-01-01,most comfortable work boots,9900.0,feature_use_case,
+2026-02-01,most comfortable work boots,9900.0,feature_use_case,
+2026-03-01,most comfortable work boots,9900.0,feature_use_case,
+2025-04-01,oilfield boots,170.0,trade_specific,
+2025-05-01,oilfield boots,110.0,trade_specific,
+2025-06-01,oilfield boots,110.0,trade_specific,
+2025-07-01,oilfield boots,90.0,trade_specific,
+2025-08-01,oilfield boots,110.0,trade_specific,
+2025-09-01,oilfield boots,90.0,trade_specific,
+2025-10-01,oilfield boots,110.0,trade_specific,
+2025-11-01,oilfield boots,140.0,trade_specific,
+2025-12-01,oilfield boots,110.0,trade_specific,
+2026-01-01,oilfield boots,140.0,trade_specific,
+2026-02-01,oilfield boots,140.0,trade_specific,
+2026-03-01,oilfield boots,110.0,trade_specific,
+2025-04-01,plumber boots,880.0,trade_specific,
+2025-05-01,plumber boots,880.0,trade_specific,
+2025-06-01,plumber boots,720.0,trade_specific,
+2025-07-01,plumber boots,720.0,trade_specific,
+2025-08-01,plumber boots,720.0,trade_specific,
+2025-09-01,plumber boots,720.0,trade_specific,
+2025-10-01,plumber boots,880.0,trade_specific,
+2025-11-01,plumber boots,720.0,trade_specific,
+2025-12-01,plumber boots,720.0,trade_specific,
+2026-01-01,plumber boots,720.0,trade_specific,
+2026-02-01,plumber boots,720.0,trade_specific,
+2026-03-01,plumber boots,880.0,trade_specific,
+2025-04-01,pull on work boots,2900.0,generic_work_boots,
+2025-05-01,pull on work boots,2400.0,generic_work_boots,
+2025-06-01,pull on work boots,1900.0,generic_work_boots,
+2025-07-01,pull on work boots,2400.0,generic_work_boots,
+2025-08-01,pull on work boots,2900.0,generic_work_boots,
+2025-09-01,pull on work boots,2900.0,generic_work_boots,
+2025-10-01,pull on work boots,3600.0,generic_work_boots,
+2025-11-01,pull on work boots,3600.0,generic_work_boots,
+2025-12-01,pull on work boots,3600.0,generic_work_boots,
+2026-01-01,pull on work boots,2900.0,generic_work_boots,
+2026-02-01,pull on work boots,2900.0,generic_work_boots,
+2026-03-01,pull on work boots,2900.0,generic_work_boots,
+2025-04-01,red wing boots,246000.0,branded,red_wing
+2025-05-01,red wing boots,246000.0,branded,red_wing
+2025-06-01,red wing boots,246000.0,branded,red_wing
+2025-07-01,red wing boots,246000.0,branded,red_wing
+2025-08-01,red wing boots,246000.0,branded,red_wing
+2025-09-01,red wing boots,301000.0,branded,red_wing
+2025-10-01,red wing boots,368000.0,branded,red_wing
+2025-11-01,red wing boots,368000.0,branded,red_wing
+2025-12-01,red wing boots,450000.0,branded,red_wing
+2026-01-01,red wing boots,368000.0,branded,red_wing
+2026-02-01,red wing boots,301000.0,branded,red_wing
+2026-03-01,red wing boots,301000.0,branded,red_wing
+2025-04-01,roofing boots,6600.0,trade_specific,
+2025-05-01,roofing boots,8100.0,trade_specific,
+2025-06-01,roofing boots,6600.0,trade_specific,
+2025-07-01,roofing boots,6600.0,trade_specific,
+2025-08-01,roofing boots,12100.0,trade_specific,
+2025-09-01,roofing boots,9900.0,trade_specific,
+2025-10-01,roofing boots,14800.0,trade_specific,
+2025-11-01,roofing boots,6600.0,trade_specific,
+2025-12-01,roofing boots,5400.0,trade_specific,
+2026-01-01,roofing boots,4400.0,trade_specific,
+2026-02-01,roofing boots,6600.0,trade_specific,
+2026-03-01,roofing boots,8100.0,trade_specific,
+2025-04-01,slip resistant work boots,880.0,feature_use_case,
+2025-05-01,slip resistant work boots,880.0,feature_use_case,
+2025-06-01,slip resistant work boots,1300.0,feature_use_case,
+2025-07-01,slip resistant work boots,1900.0,feature_use_case,
+2025-08-01,slip resistant work boots,3600.0,feature_use_case,
+2025-09-01,slip resistant work boots,2900.0,feature_use_case,
+2025-10-01,slip resistant work boots,2400.0,feature_use_case,
+2025-11-01,slip resistant work boots,5400.0,feature_use_case,
+2025-12-01,slip resistant work boots,1900.0,feature_use_case,
+2026-01-01,slip resistant work boots,1900.0,feature_use_case,
+2026-02-01,slip resistant work boots,1900.0,feature_use_case,
+2026-03-01,slip resistant work boots,1300.0,feature_use_case,
+2025-04-01,soft toe work boots,1600.0,generic_work_boots,
+2025-05-01,soft toe work boots,1600.0,generic_work_boots,
+2025-06-01,soft toe work boots,1600.0,generic_work_boots,
+2025-07-01,soft toe work boots,1300.0,generic_work_boots,
+2025-08-01,soft toe work boots,1600.0,generic_work_boots,
+2025-09-01,soft toe work boots,1900.0,generic_work_boots,
+2025-10-01,soft toe work boots,1900.0,generic_work_boots,
+2025-11-01,soft toe work boots,1900.0,generic_work_boots,
+2025-12-01,soft toe work boots,1900.0,generic_work_boots,
+2026-01-01,soft toe work boots,1600.0,generic_work_boots,
+2026-02-01,soft toe work boots,1600.0,generic_work_boots,
+2026-03-01,soft toe work boots,1600.0,generic_work_boots,
+2025-04-01,steel toe boots,90500.0,generic_work_boots,
+2025-05-01,steel toe boots,90500.0,generic_work_boots,
+2025-06-01,steel toe boots,90500.0,generic_work_boots,
+2025-07-01,steel toe boots,90500.0,generic_work_boots,
+2025-08-01,steel toe boots,110000.0,generic_work_boots,
+2025-09-01,steel toe boots,110000.0,generic_work_boots,
+2025-10-01,steel toe boots,110000.0,generic_work_boots,
+2025-11-01,steel toe boots,90500.0,generic_work_boots,
+2025-12-01,steel toe boots,90500.0,generic_work_boots,
+2026-01-01,steel toe boots,90500.0,generic_work_boots,
+2026-02-01,steel toe boots,90500.0,generic_work_boots,
+2026-03-01,steel toe boots,90500.0,generic_work_boots,
+2025-04-01,summer work boots,1900.0,feature_use_case,
+2025-05-01,summer work boots,1600.0,feature_use_case,
+2025-06-01,summer work boots,1600.0,feature_use_case,
+2025-07-01,summer work boots,880.0,feature_use_case,
+2025-08-01,summer work boots,260.0,feature_use_case,
+2025-09-01,summer work boots,110.0,feature_use_case,
+2025-10-01,summer work boots,70.0,feature_use_case,
+2025-11-01,summer work boots,110.0,feature_use_case,
+2025-12-01,summer work boots,140.0,feature_use_case,
+2026-01-01,summer work boots,260.0,feature_use_case,
+2026-02-01,summer work boots,590.0,feature_use_case,
+2026-03-01,summer work boots,1300.0,feature_use_case,
+2025-04-01,thorogood,22200.0,branded,thorogood
+2025-05-01,thorogood,22200.0,branded,thorogood
+2025-06-01,thorogood,22200.0,branded,thorogood
+2025-07-01,thorogood,22200.0,branded,thorogood
+2025-08-01,thorogood,22200.0,branded,thorogood
+2025-09-01,thorogood,22200.0,branded,thorogood
+2025-10-01,thorogood,27100.0,branded,thorogood
+2025-11-01,thorogood,27100.0,branded,thorogood
+2025-12-01,thorogood,33100.0,branded,thorogood
+2026-01-01,thorogood,27100.0,branded,thorogood
+2026-02-01,thorogood,27100.0,branded,thorogood
+2026-03-01,thorogood,22200.0,branded,thorogood
+2025-04-01,timberland pro,22200.0,branded,timberland_pro
+2025-05-01,timberland pro,22200.0,branded,timberland_pro
+2025-06-01,timberland pro,22200.0,branded,timberland_pro
+2025-07-01,timberland pro,18100.0,branded,timberland_pro
+2025-08-01,timberland pro,22200.0,branded,timberland_pro
+2025-09-01,timberland pro,22200.0,branded,timberland_pro
+2025-10-01,timberland pro,27100.0,branded,timberland_pro
+2025-11-01,timberland pro,33100.0,branded,timberland_pro
+2025-12-01,timberland pro,40500.0,branded,timberland_pro
+2026-01-01,timberland pro,33100.0,branded,timberland_pro
+2026-02-01,timberland pro,27100.0,branded,timberland_pro
+2026-03-01,timberland pro,27100.0,branded,timberland_pro
+2025-04-01,truewerk,60500.0,branded,truewerk
+2025-05-01,truewerk,60500.0,branded,truewerk
+2025-06-01,truewerk,60500.0,branded,truewerk
+2025-07-01,truewerk,49500.0,branded,truewerk
+2025-08-01,truewerk,40500.0,branded,truewerk
+2025-09-01,truewerk,49500.0,branded,truewerk
+2025-10-01,truewerk,74000.0,branded,truewerk
+2025-11-01,truewerk,110000.0,branded,truewerk
+2025-12-01,truewerk,74000.0,branded,truewerk
+2026-01-01,truewerk,74000.0,branded,truewerk
+2026-02-01,truewerk,49500.0,branded,truewerk
+2026-03-01,truewerk,60500.0,branded,truewerk
+2025-04-01,waterproof work boots,6600.0,generic_work_boots,
+2025-05-01,waterproof work boots,8100.0,generic_work_boots,
+2025-06-01,waterproof work boots,8100.0,generic_work_boots,
+2025-07-01,waterproof work boots,9900.0,generic_work_boots,
+2025-08-01,waterproof work boots,74000.0,generic_work_boots,
+2025-09-01,waterproof work boots,60500.0,generic_work_boots,
+2025-10-01,waterproof work boots,40500.0,generic_work_boots,
+2025-11-01,waterproof work boots,165000.0,generic_work_boots,
+2025-12-01,waterproof work boots,40500.0,generic_work_boots,
+2026-01-01,waterproof work boots,135000.0,generic_work_boots,
+2026-02-01,waterproof work boots,74000.0,generic_work_boots,
+2026-03-01,waterproof work boots,22200.0,generic_work_boots,
+2025-04-01,welding boots,2900.0,trade_specific,
+2025-05-01,welding boots,3600.0,trade_specific,
+2025-06-01,welding boots,2900.0,trade_specific,
+2025-07-01,welding boots,2900.0,trade_specific,
+2025-08-01,welding boots,6600.0,trade_specific,
+2025-09-01,welding boots,4400.0,trade_specific,
+2025-10-01,welding boots,3600.0,trade_specific,
+2025-11-01,welding boots,2900.0,trade_specific,
+2025-12-01,welding boots,2900.0,trade_specific,
+2026-01-01,welding boots,3600.0,trade_specific,
+2026-02-01,welding boots,2900.0,trade_specific,
+2026-03-01,welding boots,2900.0,trade_specific,
+2025-04-01,winter work boots,260.0,feature_use_case,
+2025-05-01,winter work boots,260.0,feature_use_case,
+2025-06-01,winter work boots,390.0,feature_use_case,
+2025-07-01,winter work boots,590.0,feature_use_case,
+2025-08-01,winter work boots,1600.0,feature_use_case,
+2025-09-01,winter work boots,2900.0,feature_use_case,
+2025-10-01,winter work boots,6600.0,feature_use_case,
+2025-11-01,winter work boots,9900.0,feature_use_case,
+2025-12-01,winter work boots,12100.0,feature_use_case,
+2026-01-01,winter work boots,5400.0,feature_use_case,
+2026-02-01,winter work boots,1900.0,feature_use_case,
+2026-03-01,winter work boots,390.0,feature_use_case,
+2025-04-01,wolverine boots,60500.0,branded,wolverine
+2025-05-01,wolverine boots,60500.0,branded,wolverine
+2025-06-01,wolverine boots,60500.0,branded,wolverine
+2025-07-01,wolverine boots,49500.0,branded,wolverine
+2025-08-01,wolverine boots,60500.0,branded,wolverine
+2025-09-01,wolverine boots,60500.0,branded,wolverine
+2025-10-01,wolverine boots,74000.0,branded,wolverine
+2025-11-01,wolverine boots,110000.0,branded,wolverine
+2025-12-01,wolverine boots,110000.0,branded,wolverine
+2026-01-01,wolverine boots,90500.0,branded,wolverine
+2026-02-01,wolverine boots,74000.0,branded,wolverine
+2026-03-01,wolverine boots,74000.0,branded,wolverine
+2025-04-01,work boots,135000.0,generic_work_boots,
+2025-05-01,work boots,135000.0,generic_work_boots,
+2025-06-01,work boots,135000.0,generic_work_boots,
+2025-07-01,work boots,135000.0,generic_work_boots,
+2025-08-01,work boots,201000.0,generic_work_boots,
+2025-09-01,work boots,201000.0,generic_work_boots,
+2025-10-01,work boots,246000.0,generic_work_boots,
+2025-11-01,work boots,246000.0,generic_work_boots,
+2025-12-01,work boots,165000.0,generic_work_boots,
+2026-01-01,work boots,135000.0,generic_work_boots,
+2026-02-01,work boots,135000.0,generic_work_boots,
+2026-03-01,work boots,135000.0,generic_work_boots,
+2025-04-01,work boots reddit,210.0,consideration,
+2025-05-01,work boots reddit,260.0,consideration,
+2025-06-01,work boots reddit,210.0,consideration,
+2025-07-01,work boots reddit,170.0,consideration,
+2025-08-01,work boots reddit,210.0,consideration,
+2025-09-01,work boots reddit,210.0,consideration,
+2025-10-01,work boots reddit,260.0,consideration,
+2025-11-01,work boots reddit,320.0,consideration,
+2025-12-01,work boots reddit,320.0,consideration,
+2026-01-01,work boots reddit,260.0,consideration,
+2026-02-01,work boots reddit,260.0,consideration,
+2026-03-01,work boots reddit,210.0,consideration,
+2025-04-01,work pants,49500.0,workwear_adjacency,
+2025-05-01,work pants,49500.0,workwear_adjacency,
+2025-06-01,work pants,40500.0,workwear_adjacency,
+2025-07-01,work pants,40500.0,workwear_adjacency,
+2025-08-01,work pants,90500.0,workwear_adjacency,
+2025-09-01,work pants,74000.0,workwear_adjacency,
+2025-10-01,work pants,60500.0,workwear_adjacency,
+2025-11-01,work pants,49500.0,workwear_adjacency,
+2025-12-01,work pants,40500.0,workwear_adjacency,
+2026-01-01,work pants,40500.0,workwear_adjacency,
+2026-02-01,work pants,40500.0,workwear_adjacency,
+2026-03-01,work pants,49500.0,workwear_adjacency,
+2025-04-01,work shirts,18100.0,workwear_adjacency,
+2025-05-01,work shirts,18100.0,workwear_adjacency,
+2025-06-01,work shirts,18100.0,workwear_adjacency,
+2025-07-01,work shirts,18100.0,workwear_adjacency,
+2025-08-01,work shirts,18100.0,workwear_adjacency,
+2025-09-01,work shirts,14800.0,workwear_adjacency,
+2025-10-01,work shirts,12100.0,workwear_adjacency,
+2025-11-01,work shirts,12100.0,workwear_adjacency,
+2025-12-01,work shirts,9900.0,workwear_adjacency,
+2026-01-01,work shirts,9900.0,workwear_adjacency,
+2026-02-01,work shirts,9900.0,workwear_adjacency,
+2026-03-01,work shirts,14800.0,workwear_adjacency,
+2025-04-01,workwear brands,1000.0,workwear_adjacency,
+2025-05-01,workwear brands,1000.0,workwear_adjacency,
+2025-06-01,workwear brands,880.0,workwear_adjacency,
+2025-07-01,workwear brands,880.0,workwear_adjacency,
+2025-08-01,workwear brands,1300.0,workwear_adjacency,
+2025-09-01,workwear brands,1000.0,workwear_adjacency,
+2025-10-01,workwear brands,1900.0,workwear_adjacency,
+2025-11-01,workwear brands,1900.0,workwear_adjacency,
+2025-12-01,workwear brands,1600.0,workwear_adjacency,
+2026-01-01,workwear brands,1300.0,workwear_adjacency,
+2026-02-01,workwear brands,5400.0,workwear_adjacency,
+2026-03-01,workwear brands,4400.0,workwear_adjacency,
